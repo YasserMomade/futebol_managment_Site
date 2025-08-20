@@ -23,6 +23,8 @@ class Result {
         $stmt->bindParam(":gols_casa", $this->gols_casa);
         $stmt->bindParam(":gols_fora", $this->gols_fora);
         return $stmt->execute();
+        header("Location: times.php"); 
+        exit();
     }
 
     // Buscar resultado de uma partida

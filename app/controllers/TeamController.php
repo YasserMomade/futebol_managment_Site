@@ -46,8 +46,7 @@ class TeamController {
         $team->id = $id;
         return $team->delete();
     }
-
-    public function classificacao() {
+public function classificacao() {
     // Pega todos os times
     $teams = $this->listar();
 
@@ -63,6 +62,7 @@ class TeamController {
     foreach ($teams as $team) {
         $tabela[$team['id']] = [
             'nome' => $team['nome'],
+            'jogos' => 0,      // <<--- novo campo
             'pontos' => 0,
             'vitorias' => 0,
             'empates' => 0,
@@ -78,15 +78,20 @@ class TeamController {
         $res = $resultCtrl->getByMatch($match['id']);
         if (!$res) continue; // se não tem resultado, pula
 
-        $idCasa = $match['time_casa_id'] ?? $match['time_casa'];
-        $idFora = $match['time_fora_id'] ?? $match['time_fora'];
+        $idCasa = $match['time_casa_id'];
+        $idFora = $match['time_fora_id'];
 
         $golsCasa = $res['gols_casa'];
         $golsFora = $res['gols_fora'];
 
+        // Incrementa jogos
+        $tabela[$idCasa]['jogos'] += 1;
+        $tabela[$idFora]['jogos'] += 1;
+
         // Gols pró / contra
         $tabela[$idCasa]['gols_pro'] += $golsCasa;
         $tabela[$idCasa]['gols_contra'] += $golsFora;
+
         $tabela[$idFora]['gols_pro'] += $golsFora;
         $tabela[$idFora]['gols_contra'] += $golsCasa;
 
@@ -121,5 +126,4 @@ class TeamController {
 
     return $tabela;
 }
-
 }

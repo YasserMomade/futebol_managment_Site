@@ -74,6 +74,6 @@ $matches = $matchCtrl->listar();
     <?php endforeach; ?>
 </table>
 
-<p><a href="../index.php">⬅ Voltar</a></p>
+<p><a href="index.php">⬅ Voltar</a></p>
 </body>
 </html>

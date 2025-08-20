@@ -6,7 +6,7 @@ $resultCtrl = new ResultController();
 $matchCtrl = new MatchController();
 
 // Listar partidas para o combo
-$matches = $matchCtrl->listar();
+$matches = $matchCtrl->listarSemResultado();
 
 // Se enviou resultado
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'resultado') {
@@ -50,6 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'resultado') {
     <button type="submit" name="action" value="resultado">Salvar Resultado</button>
 </form>
 
-<p><a href="../index.php">⬅ Voltar</a></p>
+<p><a href="index.php">⬅ Voltar</a></p>
 </body>
 </html>

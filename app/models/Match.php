@@ -26,16 +26,41 @@ class MatchModel {
     }
 
     // Listar todas
-    public function readAll() {
-        $query = "SELECT m.id, m.rodada As partidas, t1.nome AS time_casa, t2.nome AS time_fora
-                  FROM " . $this->table_name . " m
-                  JOIN times t1 ON m.time_casa_id = t1.id
-                  JOIN times t2 ON m.time_fora_id = t2.id
-                  ORDER BY m.rodada, m.id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt;
-    }
+   public function readAll() {
+    $query = "SELECT 
+                 m.id, 
+                 m.rodada, 
+                 m.time_casa_id, 
+                 m.time_fora_id, 
+                 t1.nome AS time_casa, 
+                 t2.nome AS time_fora
+              FROM " . $this->table_name . " m
+              JOIN times t1 ON m.time_casa_id = t1.id
+              JOIN times t2 ON m.time_fora_id = t2.id
+              ORDER BY m.rodada, m.id";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt;
+}
+
+// Listar apenas partidas sem resultado registrado
+public function listarSemResultado() {
+    $query = "SELECT m.id, m.rodada, 
+                     t1.nome AS time_casa, 
+                     t2.nome AS time_fora
+              FROM " . $this->table_name . " m
+              JOIN times t1 ON m.time_casa_id = t1.id
+              JOIN times t2 ON m.time_fora_id = t2.id
+              LEFT JOIN results r ON m.id = r.match_id
+              WHERE r.id IS NULL
+              ORDER BY m.rodada, m.id";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
     // Buscar por ID
     public function readOne() {

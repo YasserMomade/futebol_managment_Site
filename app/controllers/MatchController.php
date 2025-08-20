@@ -31,6 +31,12 @@ class MatchController {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function listarSemResultado() {
+        $match = new MatchModel($this->db);
+        $stmt = $match->listarSemResultado();
+         return $stmt;
+}
+
     // Buscar partida por id
     public function get($id) {
         $match = new MatchModel($this->db);

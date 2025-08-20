@@ -17,6 +17,7 @@ $tabela = $ctrl->classificacao();
     <tr>
         <th>Posição</th>
         <th>Time</th>
+        <th>Jogos</th> <!-- nova coluna -->
         <th>Pontos</th>
         <th>Vitórias</th>
         <th>Empates</th>
@@ -29,6 +30,7 @@ $tabela = $ctrl->classificacao();
     <tr>
         <td><?= $pos++ ?></td>
         <td><?= $linha['nome'] ?></td>
+        <td><?= $linha['jogos'] ?></td> <!-- exibe jogos -->
         <td><?= $linha['pontos'] ?></td>
         <td><?= $linha['vitorias'] ?></td>
         <td><?= $linha['empates'] ?></td>
@@ -40,6 +42,6 @@ $tabela = $ctrl->classificacao();
     <?php endforeach; ?>
 </table>
 
-<p><a href="../index.php">⬅ Voltar</a></p>
+<p><a href="index.php">⬅ Voltar</a></p>
 </body>
 </html>

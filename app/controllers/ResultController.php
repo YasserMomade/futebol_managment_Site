@@ -18,6 +18,7 @@ class ResultController {
         $result->gols_casa = $gols_casa;
         $result->gols_fora = $gols_fora;
         return $result->create();
+        
     }
 
     // Buscar resultado por partida
