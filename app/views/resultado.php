@@ -14,14 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'resultado') {
     $gols_casa = $_POST['gols_casa'];
     $gols_fora = $_POST['gols_fora'];
 
-    // Verifica se já existe resultado
+    // Salvar ou atualizar na tabela resultados
     $existing = $resultCtrl->getByMatch($match_id);
     if ($existing) {
         $resultCtrl->update($match_id, $gols_casa, $gols_fora);
     } else {
         $resultCtrl->create($match_id, $gols_casa, $gols_fora);
     }
+
+    // Atualizar também na tabela partidas
+    $matchCtrl->atualizarResultado($match_id, $gols_casa, $gols_fora);
 }
+
 ?>
 
 <!DOCTYPE html>

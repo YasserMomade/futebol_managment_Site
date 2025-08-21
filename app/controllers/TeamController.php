@@ -47,6 +47,25 @@ class TeamController {
         return $team->delete();
     }
 
+    // listar sem rodadas
+public function listarDisponiveis($rodada) {
+    $sql = "
+        SELECT * FROM times 
+        WHERE id NOT IN (
+            SELECT time_casa_id FROM partidas WHERE rodada = :rodada
+            UNION
+            SELECT time_fora_id FROM partidas WHERE rodada = :rodada
+        )
+    ";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindParam(':rodada', $rodada);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
     // ======================
     // CLASSIFICAÇÃO
     // ======================

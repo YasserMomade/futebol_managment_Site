@@ -29,6 +29,7 @@ class MatchModel {
    public function readAll() {
     $query = "SELECT 
                  m.id, 
+                 m.status,
                  m.rodada, 
                  m.time_casa_id, 
                  m.time_fora_id, 
@@ -91,4 +92,21 @@ public function listarSemResultado() {
         $stmt->bindParam(":id", $this->id);
         return $stmt->execute();
     }
+
+    // Atualizar resultado e status da partida
+public function atualizarResultado($gols_casa, $gols_fora) {
+    $status = 'jogada'; 
+    $query = "UPDATE " . $this->table_name . " 
+              SET gols_casa = :gols_casa, 
+                  gols_fora = :gols_fora, 
+                  status = :status
+              WHERE id = :id";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":gols_casa", $gols_casa);
+    $stmt->bindParam(":gols_fora", $gols_fora);
+    $stmt->bindParam(":status", $status);
+    $stmt->bindParam(":id", $this->id);
+    return $stmt->execute();
+}
+
 }
