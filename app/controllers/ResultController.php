@@ -1,6 +1,6 @@
 <?php
 // app/controllers/ResultController.php
-require_once "../config/Database.php";
+require_once __DIR__ . "/../config/conn.php";
 require_once "../models/Result.php";
 
 class ResultController {

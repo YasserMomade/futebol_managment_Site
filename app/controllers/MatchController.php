@@ -1,6 +1,6 @@
 <?php
 // app/controllers/MatchController.php
-require_once "../config/Database.php";
+require_once __DIR__ . "/../config/conn.php";
 require_once "../models/Match.php";
 
 class MatchController {
@@ -29,7 +29,6 @@ public function create($rodada, $time_casa, $time_fora) {
         return ["ok" => false, "mensagem" => "❌ Erro ao registrar a partida."];
     }
 }
-
 
     // Listar todas partidas
     public function listar() {

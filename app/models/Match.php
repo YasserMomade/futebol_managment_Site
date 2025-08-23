@@ -33,6 +33,8 @@ class MatchModel {
                  m.rodada, 
                  m.time_casa_id, 
                  m.time_fora_id, 
+                 m.gols_casa, 
+                 m.gols_fora,
                  t1.nome AS time_casa, 
                  t2.nome AS time_fora
               FROM " . $this->table_name . " m
@@ -47,7 +49,7 @@ class MatchModel {
 
 // Listar apenas partidas sem resultado registrado
 public function listarSemResultado() {
-    $query = "SELECT m.id, m.rodada, 
+    $query = "SELECT m.id, m.rodada,
                      t1.nome AS time_casa, 
                      t2.nome AS time_fora
               FROM " . $this->table_name . " m
@@ -95,7 +97,7 @@ public function listarSemResultado() {
 
     // Atualizar resultado e status da partida
 public function atualizarResultado($gols_casa, $gols_fora) {
-    $status = 'jogada'; 
+    $status = 'finalizada'; 
     $query = "UPDATE " . $this->table_name . " 
               SET gols_casa = :gols_casa, 
                   gols_fora = :gols_fora, 

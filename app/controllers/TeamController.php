@@ -1,6 +1,6 @@
 <?php
 // app/controllers/TeamController.php
-require_once "../config/Database.php";
+require_once __DIR__ . "/../config/conn.php";
 require_once "../models/Team.php";
 
 class TeamController {

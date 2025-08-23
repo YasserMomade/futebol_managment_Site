@@ -9,6 +9,7 @@ $tabela = $ctrl->classificacao();
 <head>
     <meta charset="UTF-8">
     <title>Tabela de Classificação</title>
+  <link rel="stylesheet" href="../assets/style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
